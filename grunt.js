@@ -77,7 +77,7 @@ module.exports = function(grunt) {
       },
       test: {
         files: ['pub/src/**/*.coffee', 'pub/spec/**/*.coffee'],
-        tasks: ['build:test', 'mocha']
+        tasks: ['test']
       }
     },
 
@@ -121,5 +121,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build:test', 'copy jade coffee:spec');
   grunt.registerTask('tdd', 'watch:test');
   grunt.registerTask('default', 'build:dev server reload open watch:dev');
+  grunt.registerTask('test', 'build:test mocha');
 
 }
