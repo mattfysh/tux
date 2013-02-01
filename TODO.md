@@ -1,5 +1,3 @@
-- travis CI
-- app.js to coffeescript
 - basic UI -- logo, nav icons, page area linked to controller
 ....
 - upgrade to grunt 0.4.0

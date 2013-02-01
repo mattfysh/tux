@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     'chai-jquery/chai-jquery.js',
     'sinon',
     'sinon-chai/lib/sinon-chai.js',
-    'angular-mock'
+    'angular-mocks'
   ]);
   copy['pub/dist/test/lib/mocha.css'] = 'lib/mocha/mocha.css';
 
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
     watch: {
       dev: {
         files: ['pub/src/**/*.coffee', 'pub/index.jade'],
-        tasks: ['build:dev', 'reload']
+        tasks: ['build', 'reload']
       },
       test: {
         files: ['pub/src/**/*.coffee', 'pub/spec/**/*.coffee'],
@@ -117,10 +117,9 @@ module.exports = function(grunt) {
     open(this.data);
   });
 
-  grunt.registerTask('build:dev', 'copy jade coffee:src');
-  grunt.registerTask('build:test', 'copy jade coffee:spec');
+  grunt.registerTask('build', 'copy jade coffee');
   grunt.registerTask('tdd', 'watch:test');
-  grunt.registerTask('default', 'build:dev server reload open watch:dev');
-  grunt.registerTask('test', 'build:test mocha');
+  grunt.registerTask('default', 'build server reload open watch:dev');
+  grunt.registerTask('test', 'build mocha');
 
 }

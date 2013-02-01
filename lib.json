@@ -5,7 +5,7 @@
     "requirejs": "~2.1.2",
     "angular": "~1.0.3",
     "angular-resource": "https://raw.github.com/angular/angular.js/master/src/ngResource/resource.js",
-    "angular-mock": "https://raw.github.com/angular/angular.js/master/src/ngMock/angular-mocks.js",
+    "angular-mocks": "https://raw.github.com/angular/angular.js/master/src/ngMock/angular-mocks.js",
     "jquery": "~1.8.3",
     "lodash": "~1.0.0-rc.3",
     "chai": "~1.4.2",

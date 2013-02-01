@@ -6,7 +6,7 @@ do ->
     'chai-jquery',
     'sinon',
     'sinon-chai',
-    'angular-mock'
+    'angular-mocks'
   ]
 
   # expose the bdd mocha syntax
@@ -19,8 +19,8 @@ do ->
   for src in require.srcPaths
     specPath = "../spec/#{src}.spec"
     require.deps.push specPath
-    # all specs require angular-mock to be loaded
-    require.shim[specPath] = ['angular-mock']
+    # all specs require angular-mocks to be loaded
+    require.shim[specPath] = ['angular-mocks']
 
   # ensure jquery is loaded before loading chai-jquery
   require.shim['chai-jquery'] = ['jquery']
