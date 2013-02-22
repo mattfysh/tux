@@ -1,6 +1,4 @@
-angular.module('tux.services', ['ngResource'])
-
-.factory 'Schedule', ($resource) ->
+angular.module('tux.services').factory 'Schedule', ($resource) ->
 
   dateFormat = 'YYYYMMDD'
   freqMap =
@@ -14,12 +12,19 @@ angular.module('tux.services', ['ngResource'])
   Schedule = $resource '/models/calendar/:scheduleId'
     scheduleId: '@_id'
 
-  Schedule::getTransactionList = (end) ->
-    {date, amount, desc} = @
+  Schedule::listTransactions = (end) ->
+    {date, amount, desc, last} = @
+
+    # select which end date to use
+    if last && last < end
+      end = last
+
+    # convert dates to moment objects for manipulation
     next = moment date, dateFormat
     end = moment end, dateFormat
     interval = freqMap[@freq]
 
+    # loop through occurances
     list = while next && next <= end
 
       # extract date and lookup modifer

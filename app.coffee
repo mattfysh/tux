@@ -10,7 +10,7 @@ ObjectID = mongodb.ObjectID
 collections = {}
 
 app.use express.bodyParser()
-app.use express.static 'public'
+app.use express.static 'pub/dist/dev'
 
 dbConn.open (err, db) ->
   throw err if err

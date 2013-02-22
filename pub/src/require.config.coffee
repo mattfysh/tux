@@ -3,11 +3,13 @@ require = do ->
   libPaths = [
     'angular-resource',
     'moment',
-    'jquery'
+    'jquery',
+    'lodash'
   ]
   
   srcPaths = [
-    'schedule/model'
+    'schedule/model',
+    'schedule/group'
   ]
 
   makeLibPaths = (libs, paths = {}) ->
@@ -21,3 +23,5 @@ require = do ->
   paths: makeLibPaths libPaths
   makeLibPaths: makeLibPaths
   srcPaths: srcPaths
+
+angular.module('tux.services', ['ngResource']);

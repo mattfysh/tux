@@ -28,7 +28,7 @@ describe 'schedule model', ->
     list = null
 
     beforeEach ->
-      list = schedule.getTransactionList '20130206'
+      list = schedule.listTransactions '20130206'
 
     it 'is an array', ->
       list.should.be.a 'array'
@@ -48,14 +48,14 @@ describe 'schedule model', ->
     it 'has third occurance as third item in array', ->
       list[2].date.should.equal '20130206'
 
-    it 'should not go past given end date', ->
+    it 'should not go past end date parameter', ->
       list.should.have.length 3
 
   describe 'frequencies', ->
 
     withFreq = (freq, secondDate) ->
       schedule.freq = freq
-      list = schedule.getTransactionList secondDate
+      list = schedule.listTransactions secondDate
       list[1].date.should.equal secondDate
 
     it 'can be daily', ->
@@ -75,20 +75,20 @@ describe 'schedule model', ->
 
     it 'can be once only', ->
       delete schedule.freq
-      list = schedule.getTransactionList '20130206'
+      list = schedule.listTransactions '20130206'
       list.should.have.length 1
 
   describe 'modifier', ->
 
     it 'changes details of an occurance', ->
-      list = schedule.getTransactionList '20130213'
+      list = schedule.listTransactions '20130213'
       {date, amount, desc} = list[3]
       date.should.equal '20130212'
       amount.should.equal 43.21
       desc.should.equal 'carob'
 
     it 'can affect all following occurances', ->
-      list = schedule.getTransactionList '20130227'
+      list = schedule.listTransactions '20130227'
       {date, amount, desc} = list[5]
       date.should.equal '20130227'
       amount.should.equal 3
@@ -99,9 +99,16 @@ describe 'schedule model', ->
   describe 'startup process', ->
     # creates pending transactions, updates data
 
+  describe 'end date', ->
+
+    it 'stops all transactions occuring after', ->
+      schedule.freq = 'd'
+      schedule.last = '20130125'
+      list = schedule.listTransactions '20130130'
+      list.should.have.length 3
+
   # TODO
   # caching
   # changing date or frequency: erases all modifiers, invalidates cache
   # changing amount or desc: smart cache refresh
-  # end date
   # input checking & errors
